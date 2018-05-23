@@ -476,3 +476,9 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
+
+/* alex styles starts here */
+.navbar .navbar-nav.navbar-sidenav{
+  overflow: scroll;
+}
+/* alex styles ends here */
