@@ -11,7 +11,7 @@ class User_api_controller extends Api_Controller
 	
 	function __construct()
 	{
-		
+		parent::__construct();
 	}
 
 	public function login(){

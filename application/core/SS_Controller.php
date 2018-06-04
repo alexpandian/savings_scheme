@@ -30,6 +30,7 @@ class Api_Controller extends SS_Controller
 	{
 		parent::__construct();
 		$this->load->library('api');
+		$this->load->library("JWT");
 	}
 }
 
@@ -60,7 +61,7 @@ class Admin_Controller extends Api_Controller
 	
 	function __construct()
 	{
-		parent::__construct();
+		parent::__construct();	
 	}
 }
 
