@@ -12,7 +12,8 @@ const routes : Routes = [
 
 	{
 		path      :'dashboard',
-		component : DashboardComponent
+		component : DashboardComponent,
+		canActivate : [ true ]
 	},
 
 	{
@@ -24,7 +25,7 @@ const routes : Routes = [
 
 @NgModule({
   imports: [
-  	RouterModule.forRoot(routes, {  })
+  	RouterModule.forRoot(routes, { enableTracing : true })
   ],
   exports : [
   	RouterModule
