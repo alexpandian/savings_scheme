@@ -9,6 +9,11 @@ export class RouteGuardService implements CanActivate {
   constructor(private authService : AuthService) {  }
 
   canActivate() : boolean{
+  	const token : string = localStorage.getItem('token');
+  	if(!token){
+  		alert('no token in localstorage');
+  		return false;
+  	}
   	return this.authService.authendicate();
   }
 

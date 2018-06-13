@@ -9,8 +9,8 @@ export class AuthService {
   constructor( private http : HttpClient ) { }
 
   authendicate(): boolean{
-  	this.http.get('http://localhost:4200',{ responseType : 'text' }).subscribe((respose)=>{
-  		console.log(respose);
+  	this.http.get('http://localhost/savings_scheme/admin/check').subscribe((response)=>{
+  		console.log(response);
   	});
   	return true;
   }

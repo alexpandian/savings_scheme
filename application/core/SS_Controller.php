@@ -30,7 +30,27 @@ class Api_Controller extends SS_Controller
 	{
 		parent::__construct();
 		$this->load->library('api');
+	}
+}
+
+/**
+ * For Secured API common functions. 
+ * @package Savings scheme
+ * @subpackage secured API controller
+ * @author Alex pandian
+ */
+class Secured_Api_Controller extends Api_Controller
+{
+	
+	function __construct()
+	{
+		parent::__construct();
 		$this->load->library("JWT");
+		$headers = $this->input->request_headers();
+		$token = $this->input->server('Authorization');
+
+		$this->api->add_to_response('status',$headers['Authorization']);
+		$this->api->send_200_response();
 	}
 }
 
@@ -56,12 +76,12 @@ class Public_Controller extends Api_Controller
  * @subpackage  Admin controller
  * @author Alex pandian
  */
-class Admin_Controller extends Api_Controller
+class Admin_Controller extends Secured_Api_Controller
 {
 	
 	function __construct()
 	{
-		parent::__construct();	
+		parent::__construct(); 
 	}
 }
 
@@ -71,7 +91,7 @@ class Admin_Controller extends Api_Controller
  * @subpackage  User controller
  * @author Alex pandian
  */
-class User_Controller extends Api_Controller
+class User_Controller extends Secured_Api_Controller
 {
 	
 	function __construct()

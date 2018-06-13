@@ -13,6 +13,13 @@ class Api
 	function __construct()
 	{
 		$this->CI =& get_instance(); 
+		$this->set_headers();
+	}
+
+	function set_headers(){
+		$this->CI->output->set_header('Access-Control-Allow-Origin: http://localhost:4200');
+		$this->CI->output->set_header('Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE,HEAD');
+		$this->CI->output->set_header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
 		$this->CI->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
 		$this->CI->output->set_header('Cache-Control: post-check=0, pre-check=0');
 		$this->CI->output->set_header('Pragma: no-cache');
