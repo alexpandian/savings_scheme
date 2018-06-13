@@ -30,6 +30,12 @@ class Api_Controller extends SS_Controller
 	{
 		parent::__construct();
 		$this->load->library('api');
+		$request_method = $this->input->method();
+		if($request_method == 'options'){
+			$this->output->set_status_header(200, 'OK');
+			$this->output->_display();
+			exit;
+		}
 	}
 }
 
@@ -41,16 +47,20 @@ class Api_Controller extends SS_Controller
  */
 class Secured_Api_Controller extends Api_Controller
 {
-	
+	private $token_payload;
+
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->library("JWT");
-		$headers = $this->input->request_headers();
-		$token = $this->input->server('Authorization');
-
-		$this->api->add_to_response('status',$headers['Authorization']);
-		$this->api->send_200_response();
+		$token = $this->input->get_request_header('Authorization', true);
+		list($jwt) = sscanf( $token, 'Bearer %s');
+		$token_decoded = $this->jwt->decode($jwt, true);
+		if($token_decoded !== false){
+			$this->token_payload = $token_decoded;
+		}else{
+			$this->api->send_401_response();
+		}
 	}
 }
 

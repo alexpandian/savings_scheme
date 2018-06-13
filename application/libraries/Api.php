@@ -52,7 +52,8 @@ class Api
 
 	public function send_401_response(){
 		$this->CI->output->set_status_header(401, 'Unauthorized');
-		$this->send_json_response();
+		$this->CI->output->_display();
+		exit;
 	}
 
 	public function send_403_response(){
