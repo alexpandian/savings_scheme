@@ -20,8 +20,12 @@ class Admin_api_controller extends Public_controller
 	}
 
 	public function generate_dummy_token(){
+		$payload = array(
+					'name' => 'Alex pandian',
+					'admin' => true
+				);
 		$this->load->library('JWT');
-		$token = $this->jwt->encode([]);
+		$token = $this->jwt->encode($payload);
 		$this->api->add_to_response('token', $token);
 		$this->api->send_200_response();
 	}

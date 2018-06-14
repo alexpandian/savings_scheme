@@ -55,7 +55,7 @@ class Secured_Api_Controller extends Api_Controller
 		$this->load->library("JWT");
 		$token = $this->input->get_request_header('Authorization', true);
 		list($jwt) = sscanf( $token, 'Bearer %s');
-		$token_decoded = $this->jwt->decode($jwt, true);
+		$token_decoded = $this->jwt->decode($jwt);
 		if($token_decoded !== false){
 			$this->token_payload = $token_decoded;
 		}else{

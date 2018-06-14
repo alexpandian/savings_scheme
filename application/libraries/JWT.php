@@ -18,11 +18,13 @@ class JWT
 
 	private $CI;
 	private $jwt_key;
+	private $jwt_exp_interval;
 
 	function __construct(){
 		$this->CI =& get_instance();
 		$this->CI->config->load('JWT');
 		$this->jwt_key = $this->CI->config->item('jwt_key');
+		$this->jwt_exp_interval = $this->CI->config->item('jwt_exp_interval');
 	}
 	/**
 	 * Decodes a JWT string into a PHP object.
@@ -38,7 +40,7 @@ class JWT
 	 * @uses jsonDecode
 	 * @uses urlsafeB64Decode
 	 */
-	public function decode($jwt, $verify = true)
+	public function decode($jwt)
 	{
 		$key = $this->jwt_key;
 		$tks = explode('.', $jwt);
@@ -56,15 +58,17 @@ class JWT
 			return false;
 		}
 		$sig = $this->urlsafeB64Decode($cryptob64);
-		if ($verify) {
-			if (empty($header->alg)) {
-				//throw new DomainException('Empty algorithm');
-				return false;
-			}
-			if ($sig != $this->sign("$headb64.$bodyb64", $key, $header->alg)) {
-				//throw new UnexpectedValueException('Signature verification failed');
-				return false;
-			}
+		if (empty($header->alg)) {
+			//throw new DomainException('Empty algorithm');
+			return false;
+		}
+		if ($sig != $this->sign("$headb64.$bodyb64", $key, $header->alg)) {
+			//throw new UnexpectedValueException('Signature verification failed');
+			return false;
+		}
+
+		if( $payload->exp <= time() ){
+			return false;
 		}
 		return $payload;
 	}
@@ -85,6 +89,7 @@ class JWT
 	{
 		$key = $this->jwt_key;
 		$header = array('typ' => 'JWT', 'alg' => $algo);
+		$payload = $this->_addRegisteredClaims($payload);
 
 		$segments = array();
 		$segments[] = $this->urlsafeB64Encode($this->jsonEncode($header));
@@ -209,4 +214,23 @@ class JWT
 		);
 	}
 
+	/**
+	 * Helper method to add the registered common cliaims such as exp, iss.
+	 *
+	 * @param $payload the payload with public claims
+	 *
+	 * @return $payload
+	 */
+
+	private function _addRegisteredClaims($payload){
+		$dateTime = new DateTime('now');
+		$exp = $dateTime->add(new DateInterval('P'.$this->jwt_exp_interval))->format('U');
+		$payload['iss'] = base_url();
+		$payload['iat'] = time();
+		$payload['exp'] = $exp;
+		return $payload;
+	}
+
 }
+
+
