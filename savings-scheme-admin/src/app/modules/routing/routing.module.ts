@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RouteGuardService } from '../services/route-guard/route-guard.service';
-import { DashboardComponent } from '../dashboard/dashboard/dashboard.component';
-import { CustomersListComponent } from '../customers/customers-list/customers-list.component';
 
-import { AuthService } from '../services/auth/auth.service';
+import { RouteGuardService } from '../../common/services/route-guard/route-guard.service';
+import { DashboardComponent } from '../../dashboard/components/dashboard/dashboard.component';
+import { CustomersListComponent } from '../../customers/components/customers-list/customers-list.component';
+
+import { AuthService } from '../../common/services/auth/auth.service';
 
 const routes : Routes = [
 	{
@@ -42,8 +43,7 @@ const routes : Routes = [
 @NgModule({
 
   declarations : [
-  	CustomersListComponent,
-  	DashboardComponent
+  	
   ],
   imports: [
   	RouterModule.forRoot(routes, { enableTracing : false })

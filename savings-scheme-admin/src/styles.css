@@ -479,6 +479,6 @@ footer.sticky-footer {
 
 /* alex styles starts here */
 .navbar .navbar-nav.navbar-sidenav{
-  overflow: scroll;
+  /*overflow: scroll;*/
 }
 /* alex styles ends here */

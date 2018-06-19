@@ -4,18 +4,22 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ContentComponent } from './content/content.component';
+import { NavbarComponent } from './common/components/navbar/navbar.component';
+import { ContentComponent } from './common/components/content/content.component';
+import { DashboardComponent } from './dashboard/components/dashboard/dashboard.component';
+import { CustomersListComponent } from './customers/components/customers-list/customers-list.component';
 
-import { RoutingModule } from './routing/routing.module';
-import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
+import { RoutingModule } from './modules/routing/routing.module';
+import { AuthorizationInterceptor } from './common/interceptors/authorization.interceptor';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    ContentComponent
+    ContentComponent,
+    CustomersListComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

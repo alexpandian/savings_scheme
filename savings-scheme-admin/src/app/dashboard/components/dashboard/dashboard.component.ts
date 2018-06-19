@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ssa-dashboard',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  public title : string;
+  
+  constructor( private route : ActivatedRoute ) { }
 
   ngOnInit() {
+  	this.route.data.subscribe((d)=>{
+  		this.title = d.title;
+  	});
   }
 
 }
