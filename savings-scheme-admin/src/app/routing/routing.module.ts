@@ -19,7 +19,7 @@ const routes : Routes = [
 		component : DashboardComponent,
 		canActivate : [ RouteGuardService ],
 		data : {
-			text : 'dashboard'
+			title : 'dashboard'
 		}
 	},
 
@@ -28,7 +28,7 @@ const routes : Routes = [
 		component : CustomersListComponent,
 		canActivate : [ RouteGuardService ],
 		data : {
-			text : 'customers'
+			title : 'customers'
 		}
 	},
 
