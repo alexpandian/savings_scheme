@@ -8,7 +8,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ContentComponent } from './content/content.component';
 
 import { RoutingModule } from './routing/routing.module';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
 
 
@@ -16,8 +15,7 @@ import { AuthorizationInterceptor } from './interceptors/authorization.intercept
   declarations: [
     AppComponent,
     NavbarComponent,
-    ContentComponent,
-    DashboardComponent
+    ContentComponent
   ],
   imports: [
     BrowserModule,

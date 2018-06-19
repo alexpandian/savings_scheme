@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ssa-content',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
-  constructor() { }
+  constructor( private route : ActivatedRoute ) { }
 
   ngOnInit() {
+  	this.route.data.subscribe((data)=>{
+  		console.log(data);
+  	});
+  	console.log(this.route);
   }
 
 }

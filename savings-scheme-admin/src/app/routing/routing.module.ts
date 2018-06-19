@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RouteGuardService } from '../services/route-guard/route-guard.service';
 import { DashboardComponent } from '../dashboard/dashboard/dashboard.component';
+import { CustomersListComponent } from '../customers/customers-list/customers-list.component';
 
 import { AuthService } from '../services/auth/auth.service';
 
@@ -16,7 +17,19 @@ const routes : Routes = [
 	{
 		path      :'dashboard',
 		component : DashboardComponent,
-		canActivate : [ RouteGuardService ]
+		canActivate : [ RouteGuardService ],
+		data : {
+			text : 'dashboard'
+		}
+	},
+
+	{
+		path : 'customers',
+		component : CustomersListComponent,
+		canActivate : [ RouteGuardService ],
+		data : {
+			text : 'customers'
+		}
 	},
 
 	{
@@ -27,6 +40,11 @@ const routes : Routes = [
 ]; 
 
 @NgModule({
+
+  declarations : [
+  	CustomersListComponent,
+  	DashboardComponent
+  ],
   imports: [
   	RouterModule.forRoot(routes, { enableTracing : false })
   ],
