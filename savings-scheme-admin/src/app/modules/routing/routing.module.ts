@@ -30,7 +30,32 @@ const routes : Routes = [
 		canActivate : [ RouteGuardService ],
 		data : {
 			title : 'customers'
-		}
+		},
+		children : [
+			{
+				path : 'add',
+				component : CustomerAddComponent,
+				data : {
+					titile : 'Add'
+				}
+			},
+			{
+				path : ':id',
+				component : CustomerViewComponent,
+				data : {
+					title : 'View'
+				},
+				children : [
+					{
+						path : 'edit',
+						component : CustomerEditComponent,
+						data : {
+							title : 'Edit'
+						}
+					}
+				]
+			}
+		]
 	},
 
 	{
