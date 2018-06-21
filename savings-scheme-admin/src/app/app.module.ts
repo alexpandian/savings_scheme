@@ -11,6 +11,10 @@ import { CustomersListComponent } from './customers/components/customers-list/cu
 
 import { RoutingModule } from './modules/routing/routing.module';
 import { AuthorizationInterceptor } from './common/interceptors/authorization.interceptor';
+import { CustomerAddComponent } from './customers/components/customer-add/customer-add.component';
+import { CustomerViewComponent } from './customers/components/customer-view/customer-view.component';
+import { CustomerEditComponent } from './customers/components/customer-edit/customer-edit.component';
+import { CustomersComponent } from './customers/components/customers/customers.component';
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import { AuthorizationInterceptor } from './common/interceptors/authorization.in
     NavbarComponent,
     ContentComponent,
     CustomersListComponent,
-    DashboardComponent
+    DashboardComponent,
+    CustomerAddComponent,
+    CustomerViewComponent,
+    CustomerEditComponent,
+    CustomersComponent
   ],
   imports: [
     BrowserModule,

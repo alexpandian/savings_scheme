@@ -1,12 +1,25 @@
+/* 
+	* Angular imports 
+*/
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+/*
+	* custom services imports 
+*/ 
+import { AuthService } from '../../common/services/auth/auth.service';
 
+/*
+	* custom components imports 
+*/
 import { RouteGuardService } from '../../common/services/route-guard/route-guard.service';
 import { DashboardComponent } from '../../dashboard/components/dashboard/dashboard.component';
+import { CustomersComponent } from '../../customers/components/customers/customers.component';
 import { CustomersListComponent } from '../../customers/components/customers-list/customers-list.component';
+import { CustomerAddComponent } from '../../customers/components/customer-add/customer-add.component';
+import { CustomerEditComponent } from '../../customers/components/customer-edit/customer-edit.component';
+import { CustomerViewComponent } from '../../customers/components/customer-view/customer-view.component';
 
-import { AuthService } from '../../common/services/auth/auth.service';
 
 const routes : Routes = [
 	{
@@ -26,38 +39,43 @@ const routes : Routes = [
 
 	{
 		path : 'customers',
-		component : CustomersListComponent,
+		component : CustomersComponent,
 		canActivate : [ RouteGuardService ],
 		data : {
 			title : 'customers'
 		},
 		children : [
 			{
-				path : 'add',
-				component : CustomerAddComponent,
+				path : 'list',
+				component : CustomersListComponent,
+				canActivate : [ RouteGuardService ],
 				data : {
-					titile : 'Add'
+					title : 'All Customers'
 				}
 			},
 			{
-				path : ':id',
-				component : CustomerViewComponent,
+				path : 'add',
+				component : CustomerAddComponent,
+				canActivate : [ RouteGuardService ],
 				data : {
-					title : 'View'
-				},
-				children : [
-					{
-						path : 'edit',
-						component : CustomerEditComponent,
-						data : {
-							title : 'Edit'
-						}
-					}
-				]
+					title : 'Add Customer'
+				}
+			},
+			{
+				path : 'edit',
+				component : CustomerAddComponent,
+				canActivate : [ RouteGuardService ],
+				data : {
+					title : 'Edit Customer'
+				}
+			},
+			{
+				path : '',
+				redirectTo : 'list',
+				pathMatch : 'full'
 			}
 		]
 	},
-
 	{
 		path      : '**',
 		redirectTo : '/dashboard'
