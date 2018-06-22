@@ -1,3 +1,76 @@
-<p>
-  customer-add works!
-</p>
+<ol class="breadcrumb">
+	<li class="breadcrumb-item" >
+	  <a routerLink="/customers/list" >{{ 'customers' | uppercase }}</a>
+	</li>
+  <li class="breadcrumb-item active">{{ title | uppercase }}</li>
+</ol>
+<form [formGroup]="customerFrom" >
+<div class="row" >
+	<div class="col-md-6 col-lg-6 col-xs-12" >
+		<div class="card border-secondary mx-auto">
+		  <div class="card-header bg-secondary text-white">Basic Details</div>
+		  <div class="card-body">
+		    
+		      <div class="form-group">
+		        <label for="exampleInputName">Name</label>
+	            <input class="form-control" placeholder="Enter first name" formControlName="name" >
+		      </div>
+		      <div class="form-group">
+		        <label for="exampleInputName">Mobile</label>
+	            <input class="form-control" placeholder="Enter mobile number" formControlName="mobile" >
+		      </div>
+		      <div class="form-group">
+		        <label for="exampleInputEmail1">Email</label>
+		        <input class="form-control" placeholder="Enter email" formControlName="email" >
+		      </div>
+		  </div>
+		</div>
+	</div>
+
+	<div class="col-md-6 col-lg-6 col-xs-12" >
+		<div class="card border-secondary mx-auto" formGroupName="address" >
+		  <div class="card-header bg-secondary text-white">Address</div>
+		  <div class="card-body">
+		    
+		      <div class="form-group">
+		      	<label for="exampleInputName">Line #1</label>
+	            <input class="form-control" placeholder="Enter street #1" formControlName="street_1" >
+		      </div>
+		      <div class="form-group" >
+		      	<label for="exampleInputLastName">Line #2</label>
+	            <input class="form-control" placeholder="Enter street #2 if any" formControlName="street_2">
+		      </div>
+		      <div class="form-group" >
+		      	<div class="form-row">
+              		<div class="col-md-6 col-sm-12 col-xs-12">
+              			<label for="exampleInputEmail1">Area</label>
+		        		<input class="form-control" placeholder="Enter area" formControlName="area">
+              		</div>
+              		<div class="col-md-6 col-sm-12 col-xs-12">
+              			<label for="exampleInputEmail1">District</label>
+		        		<input class="form-control" placeholder="Enter " formControlName="district">
+              		</div>
+              	</div>
+		      </div>
+		      <div class="form-group" >
+		      	<div class="form-row">
+              		<div class="col-md-6 col-sm-12 col-xs-12">
+              			<label for="exampleInputEmail1">State</label>
+		        		<input class="form-control" placeholder="Enter area" formControlName="state">
+              		</div>
+              		<div class="col-md-6 col-sm-12 col-xs-12">
+              			<label for="exampleInputEmail1">Country</label>
+		        		<input class="form-control" placeholder="Enter area" formControlName="country">
+              		</div>
+              	</div>
+		      </div>
+		      <div class="form-group">
+		        <label for="exampleInputEmail1">Pincode</label>
+		        <input class="form-control" placeholder="Enter pincode" formControlName="pincode">
+		      </div>
+		  </div>
+		</div>
+	</div>
+</div>
+</form>
+
