@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2018 at 01:27 PM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Generation Time: Jun 23, 2018 at 05:07 AM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -21,6 +19,45 @@ SET time_zone = "+00:00";
 --
 -- Database: `savings_scheme`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ss_addresses`
+--
+
+CREATE TABLE `ss_addresses` (
+  `address_id` bigint(20) NOT NULL,
+  `address_person_id` bigint(20) NOT NULL,
+  `address_person_type` tinyint(4) NOT NULL,
+  `address_street_1` mediumtext,
+  `address_street_2` mediumtext,
+  `address_area` varchar(255) DEFAULT NULL,
+  `address_district` varchar(255) DEFAULT NULL,
+  `address_state` int(11) DEFAULT NULL,
+  `address_country` int(11) DEFAULT NULL,
+  `address_zip` mediumint(9) DEFAULT NULL,
+  `address_status` tinyint(4) NOT NULL DEFAULT '1',
+  `address_added_date` datetime DEFAULT NULL,
+  `address_modified_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ss_customers`
+--
+
+CREATE TABLE `ss_customers` (
+  `customer_id` bigint(20) NOT NULL,
+  `customer_name` varchar(255) NOT NULL,
+  `customer_mobile` varchar(255) DEFAULT NULL,
+  `customer_email` varchar(255) DEFAULT NULL,
+  `customer_password` varchar(255) DEFAULT NULL,
+  `customer_status` tinyint(4) NOT NULL DEFAULT '0',
+  `customer_added_date` datetime DEFAULT NULL,
+  `customer_updated_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -73,10 +110,25 @@ INSERT INTO `ss_schemes` (`scheme_id`, `scheme_name`, `scheme_description`, `sch
 --
 
 --
+-- Indexes for table `ss_addresses`
+--
+ALTER TABLE `ss_addresses`
+  ADD PRIMARY KEY (`address_id`),
+  ADD KEY `address_id` (`address_id`);
+
+--
+-- Indexes for table `ss_customers`
+--
+ALTER TABLE `ss_customers`
+  ADD PRIMARY KEY (`customer_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
 -- Indexes for table `ss_employees`
 --
 ALTER TABLE `ss_employees`
-  ADD PRIMARY KEY (`employee_id`);
+  ADD PRIMARY KEY (`employee_id`),
+  ADD KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `ss_schemes`
@@ -89,6 +141,16 @@ ALTER TABLE `ss_schemes`
 --
 
 --
+-- AUTO_INCREMENT for table `ss_addresses`
+--
+ALTER TABLE `ss_addresses`
+  MODIFY `address_id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ss_customers`
+--
+ALTER TABLE `ss_customers`
+  MODIFY `customer_id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `ss_employees`
 --
 ALTER TABLE `ss_employees`
@@ -97,8 +159,7 @@ ALTER TABLE `ss_employees`
 -- AUTO_INCREMENT for table `ss_schemes`
 --
 ALTER TABLE `ss_schemes`
-  MODIFY `scheme_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
-
+  MODIFY `scheme_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -26,9 +26,9 @@ export class CustomerAddComponent implements OnInit {
 
   createForm():void{
   	this.customerFrom = this.fb.group({
-  		name : ['', Validators.required],
+  		name : ['', [Validators.required, Validators.minLength(4)]],
   		mobile : ['', Validators.required],
-  		email : [''],
+  		email : ['',Validators.email],
   		address : this.fb.group({
   			street_1 : ['', Validators.required],
   			street_2 : [''],
@@ -37,8 +37,17 @@ export class CustomerAddComponent implements OnInit {
   			state    : ['', Validators.required],
   			country  : ['', Validators.required],
   			pincode  : ['']
+  		}),
+  		credentials : this.fb.group({
+  			password : ['', Validators.minLength(8)],
+  			confirmPassword : ['', Validators.minLength(8)]
   		})
   	});
+  }
+
+  addCustomer(){
+  	console.log(this.customerFrom.value);
+  	console.log(this.customerFrom);
   }
 
 }
