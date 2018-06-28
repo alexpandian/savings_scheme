@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { CustomersService } from './customers/services/customers/customers.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './common/components/navbar/navbar.component';
@@ -41,6 +42,10 @@ import { CustomersComponent } from './customers/components/customers/customers.c
       provide : HTTP_INTERCEPTORS,
       useClass : AuthorizationInterceptor,
       multi : true
+    },
+    {
+      provide : CustomersService,
+      useClass : CustomersService
     }
   ],
   bootstrap: [AppComponent]

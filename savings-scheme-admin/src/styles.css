@@ -481,11 +481,16 @@ footer.sticky-footer {
 .navbar .navbar-nav.navbar-sidenav{
   /*overflow: scroll;*/
 }
-.ng-valid[required], .ng-valid.required  {
+.ng-valid{
   border-left: 5px solid #42A948; /* green */
 }
 
 .ng-invalid:not(form):not(div)  {
   border-left: 5px solid #a94442; /* red */
+  border-left-color: #a94442;
+}
+.form-control:focus{
+    -webkit-box-shadow: 0 0 0 0.05rem rgba(0,123,255,.25);
+    box-shadow: 0 0 0 0.05rem rgba(0,123,255,.25);
 }
 /* alex styles ends here */
