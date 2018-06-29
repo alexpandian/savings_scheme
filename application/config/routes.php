@@ -49,6 +49,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+
+/* Customers related routes */
+$route['admin/customers/check-email'] = 'admin_api/customers/check_email';
+/* Customers related routes */
+
 $route['admin/authendicate'] = 'admin_api/common/authendicate';
 $route['admin/dummy-token'] = 'public_api/admin_api_controller/generate_dummy_token';
 $route['admin/check'] = 'admin_api/employee/checking';

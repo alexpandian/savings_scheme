@@ -16,10 +16,13 @@ export class CustomerValidatorService {
 
   validateEmail():AsyncValidatorFn{
 		return (control : AbstractControl): Observable<{[key:string]:any} | null> => {
-			this._customerService.checkCustomerEmail().subscribe((response)=>{
-				console.log(response);
+			return this._customerService.checkCustomerEmail(control.value).map((response)=>{
+				if(response.status == true){
+					return null;
+				}else{
+					return { emailTaken : true }
+				}
 			});
-			return null;
 		}
 	}
 
