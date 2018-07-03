@@ -47,22 +47,28 @@
 		        		<input class="form-control" placeholder="Enter area" formControlName="area">
               		</div>
               		<div class="col-md-6 col-sm-12 col-xs-12">
-              			<label for="exampleInputEmail1">District</label>
-		        		<input class="form-control" placeholder="Enter " formControlName="district">
-              		</div>
+              			<label for="exampleInputEmail1">Country</label>
+              			<select class="form-control" formControlName="country"  >
+              				<option value="" disabled="disabled" >-- country --</option>
+              				<option *ngFor="let country of countries" [value]=country.country_id >{{ country.country_code + ' - ' + country.country_name }}</option>
+              			</select>
+		        	</div>
               	</div>
 		      </div>
 		      <div class="form-group" >
 		      	<div class="form-row">
               		<div class="col-md-6 col-sm-12 col-xs-12">
               			<label for="exampleInputEmail1">State</label>
-		        		<input class="form-control" placeholder="Enter area" formControlName="state">
-              		</div>
+              			<select formControlName="state" class="form-control" >
+              				<option value="" disabled="disabled" > -- State -- </option>
+              				<option *ngFor="let state of states" [value]=state.state_id >{{ state.state_name }}</option>
+              			</select>
+		        	</div>
               		<div class="col-md-6 col-sm-12 col-xs-12">
-              			<label for="exampleInputEmail1">Country</label>
-              			<select class="form-control" formControlName="country"  >
-              				<option value="" disabled="disabled" >-- country --</option>
-              				<option *ngFor="let country of countries" [value]=country.country_id >{{ country.country_code + ' - ' + country.country_name }}</option>
+              			<label for="exampleInputEmail1">District</label>
+              			<select class="form-control" formControlName="district" >
+              				<option value="" > -- District --</option>
+              				<option *ngFor="let district of districts" [value]=district.district_id >{{ district.district_name }}</option>
               			</select>
 		        	</div>
               	</div>

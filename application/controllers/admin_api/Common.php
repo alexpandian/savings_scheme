@@ -28,6 +28,34 @@ class Common extends Admin_Controller
 		$this->api->add_to_response('countries', $countries);
 		$this->api->send_200_response();
 	}
+
+	public function states()
+	{
+		$country_id = $this->input->get('country');
+		if($country_id){
+			$this->load->model('States');
+			$states = $this->States->getStates($country_id);
+		}else{
+			$states = array();
+		}
+		$this->api->add_to_response('status', true);
+		$this->api->add_to_response('states', $states);
+		$this->api->send_200_response();
+	}
+
+	public function districts()
+	{
+		$state_id = $this->input->get('state');
+		if($state_id){
+			$this->load->model('Districts');
+			$districts = $this->Districts->getDistricts($state_id);
+		}else{
+			$districts = array();
+		}
+		$this->api->add_to_response('status', true);
+		$this->api->add_to_response('districts', $districts);
+		$this->api->send_200_response();
+	}
 	
 }
 

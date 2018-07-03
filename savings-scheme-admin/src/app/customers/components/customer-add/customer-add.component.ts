@@ -25,6 +25,8 @@ export class CustomerAddComponent implements OnInit {
 	title : string; 
 	customerFrom : FormGroup;
   countries : Array<any>;
+  states : Array<any>;
+  districts : Array<any>;
 
   constructor( 
   	private route : ActivatedRoute,
@@ -42,12 +44,29 @@ export class CustomerAddComponent implements OnInit {
     });
   	this.createForm();
     this.countryListerner();
+    this.stateListerner();
   }
 
   countryListerner():void{
     let countrySelected = this.customerFrom.get('address').get('country');
-    countrySelected.valueChanges.subscribe((val)=>{
-      console.log(val);
+    countrySelected.valueChanges.subscribe((countryId)=>{
+      this._addressService.getStates(countryId).subscribe((states)=>{
+        this.customerFrom.get('address').get('state').reset();
+        this.customerFrom.get('address').get('district').reset();
+        this.states = states;
+      });
+    });
+  }
+
+  stateListerner():void{
+    let stateSelected = this.customerFrom.get('address').get('state');
+    stateSelected.valueChanges.subscribe((stateId)=>{
+      if(stateId){
+        this._addressService.getDistricts(stateId).subscribe((districts)=>{
+          this.customerFrom.get('address').get('district').reset();
+          this.districts = districts;
+        });
+      }
     });
   }
 

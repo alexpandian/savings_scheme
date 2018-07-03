@@ -56,6 +56,9 @@ $route['a/customers/check-email'] = 'admin_api/customers/check_email';
 
 /* Common routes */
 $route['a/countries'] = 'admin_api/common/countries';
+$route['a/states'] = 'admin_api/common/states';
+$route['a/districts'] = 'admin_api/common/districts';
+$route['a/countries'] = 'admin_api/common/countries';
 $route['admin/authendicate'] = 'admin_api/common/authendicate';
 $route['admin/dummy-token'] = 'public_api/admin_api_controller/generate_dummy_token';
 /* Common routes */
