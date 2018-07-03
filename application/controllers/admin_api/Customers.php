@@ -13,7 +13,7 @@ class Customers extends Admin_Controller
 	}
 
 	function check_email(){
-		$this->api->add_to_response('status',false);
+		$this->api->add_to_response('status',true);
 		$this->api->send_200_response();
 	} 
 }

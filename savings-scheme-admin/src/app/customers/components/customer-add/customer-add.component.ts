@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CustomerValidatorService } from '../../services/validator/customer-validator.service';
+import { AddressService } from '../../../common/services/address/address.service';
 
 @Component({
   selector: 'ssa-customer-add',
@@ -12,6 +13,10 @@ import { CustomerValidatorService } from '../../services/validator/customer-vali
       {
         provide : CustomerValidatorService,
         useClass : CustomerValidatorService
+      },
+      {
+        provide : AddressService,
+        useClass : AddressService
       }
   ]
 })
@@ -19,18 +24,31 @@ export class CustomerAddComponent implements OnInit {
 
 	title : string; 
 	customerFrom : FormGroup;
+  countries : Array<any>;
 
   constructor( 
   	private route : ActivatedRoute,
   	private fb : FormBuilder,
-    private _customerValidatorService : CustomerValidatorService
+    private _customerValidatorService : CustomerValidatorService,
+    private _addressService : AddressService
   ) { }
 
   ngOnInit() {
   	this.route.data.subscribe((d)=>{
   		this.title = d.title;
   	});
+    this._addressService.getCountries().subscribe( (response)=> {
+      this.countries = response;
+    });
   	this.createForm();
+    this.countryListerner();
+  }
+
+  countryListerner():void{
+    let countrySelected = this.customerFrom.get('address').get('country');
+    countrySelected.valueChanges.subscribe((val)=>{
+      console.log(val);
+    });
   }
 
   createForm():void{
@@ -40,7 +58,7 @@ export class CustomerAddComponent implements OnInit {
                 [
                   Validators.required, 
                   Validators.minLength(4), 
-                  Validators.pattern("/^[a-z ,.'-]+$/i")
+                  Validators.pattern("^[A-Za-z\\s]+$")
                 ]
              ],
   		mobile : [
@@ -75,5 +93,4 @@ export class CustomerAddComponent implements OnInit {
   	console.log(this.customerFrom.value);
   	console.log(this.customerFrom);
   }
-
 }

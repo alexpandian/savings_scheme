@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2018 at 05:07 AM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Generation Time: Jul 03, 2018 at 03:13 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -45,6 +47,28 @@ CREATE TABLE `ss_addresses` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ss_countries`
+--
+
+CREATE TABLE `ss_countries` (
+  `country_id` bigint(20) NOT NULL,
+  `country_code` varchar(255) DEFAULT NULL,
+  `country_name` varchar(255) DEFAULT NULL,
+  `country_status` enum('0','1') NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ss_countries`
+--
+
+INSERT INTO `ss_countries` (`country_id`, `country_code`, `country_name`, `country_status`) VALUES
+(1, 'IND', 'india', '1'),
+(2, 'UK', 'United Kingdom', '1'),
+(3, 'USA', 'United states of America', '1');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ss_customers`
 --
 
@@ -58,6 +82,26 @@ CREATE TABLE `ss_customers` (
   `customer_added_date` datetime DEFAULT NULL,
   `customer_updated_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ss_districts`
+--
+
+CREATE TABLE `ss_districts` (
+  `district_id` bigint(20) NOT NULL,
+  `state_id` bigint(20) NOT NULL,
+  `district_name` varchar(255) NOT NULL,
+  `district_status` enum('0','1') NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ss_districts`
+--
+
+INSERT INTO `ss_districts` (`district_id`, `state_id`, `district_name`, `district_status`) VALUES
+(1, 1, 'chennai', '1');
 
 -- --------------------------------------------------------
 
@@ -105,6 +149,26 @@ CREATE TABLE `ss_schemes` (
 INSERT INTO `ss_schemes` (`scheme_id`, `scheme_name`, `scheme_description`, `scheme_due_amount`, `scheme_dues_total`) VALUES
 (1, 'scheme 1', 'scheme 1 scheme 1 scheme 1 scheme 1 scheme 1', 1000, 12);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ss_states`
+--
+
+CREATE TABLE `ss_states` (
+  `state_id` bigint(20) NOT NULL,
+  `country_id` bigint(20) NOT NULL,
+  `state_name` varchar(255) NOT NULL,
+  `state_status` enum('0','1') NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ss_states`
+--
+
+INSERT INTO `ss_states` (`state_id`, `country_id`, `state_name`, `state_status`) VALUES
+(1, 1, 'tamilnadu', '1');
+
 --
 -- Indexes for dumped tables
 --
@@ -117,11 +181,23 @@ ALTER TABLE `ss_addresses`
   ADD KEY `address_id` (`address_id`);
 
 --
+-- Indexes for table `ss_countries`
+--
+ALTER TABLE `ss_countries`
+  ADD PRIMARY KEY (`country_id`);
+
+--
 -- Indexes for table `ss_customers`
 --
 ALTER TABLE `ss_customers`
   ADD PRIMARY KEY (`customer_id`),
   ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `ss_districts`
+--
+ALTER TABLE `ss_districts`
+  ADD PRIMARY KEY (`district_id`);
 
 --
 -- Indexes for table `ss_employees`
@@ -137,6 +213,12 @@ ALTER TABLE `ss_schemes`
   ADD PRIMARY KEY (`scheme_id`);
 
 --
+-- Indexes for table `ss_states`
+--
+ALTER TABLE `ss_states`
+  ADD PRIMARY KEY (`state_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -146,10 +228,20 @@ ALTER TABLE `ss_schemes`
 ALTER TABLE `ss_addresses`
   MODIFY `address_id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `ss_countries`
+--
+ALTER TABLE `ss_countries`
+  MODIFY `country_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `ss_customers`
 --
 ALTER TABLE `ss_customers`
   MODIFY `customer_id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ss_districts`
+--
+ALTER TABLE `ss_districts`
+  MODIFY `district_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `ss_employees`
 --
@@ -160,6 +252,12 @@ ALTER TABLE `ss_employees`
 --
 ALTER TABLE `ss_schemes`
   MODIFY `scheme_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `ss_states`
+--
+ALTER TABLE `ss_states`
+  MODIFY `state_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

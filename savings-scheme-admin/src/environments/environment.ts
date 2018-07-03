@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  API_BASE_URL : 'http://localhost/savings_scheme/admin'
+  API_BASE_URL : 'http://localhost/savings_scheme/a'
 };
