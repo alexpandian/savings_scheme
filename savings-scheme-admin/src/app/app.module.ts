@@ -13,6 +13,7 @@ import { CustomersListComponent } from './customers/components/customers-list/cu
 
 import { RoutingModule } from './modules/routing/routing.module';
 import { AuthorizationInterceptor } from './common/interceptors/authorization.interceptor';
+import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { CustomerAddComponent } from './customers/components/customer-add/customer-add.component';
 import { CustomerViewComponent } from './customers/components/customer-view/customer-view.component';
 import { CustomerEditComponent } from './customers/components/customer-edit/customer-edit.component';
@@ -41,6 +42,11 @@ import { CustomersComponent } from './customers/components/customers/customers.c
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthorizationInterceptor,
+      multi : true
+    },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : ResponseInterceptor,
       multi : true
     },
     {

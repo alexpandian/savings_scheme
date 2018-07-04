@@ -14,14 +14,18 @@
 		      <div class="form-group">
 		        <label for="exampleInputName">Name</label>
 	            <input class="form-control" placeholder="Enter name" formControlName="name" >
+	            <span *ngIf="customerFrom.get('name').invalid && customerFrom.get('name').touched" class="font-italic text-danger">Enter valid name</span>
 		      </div>
 		      <div class="form-group">
 		        <label for="exampleInputName">Mobile</label>
 	            <input class="form-control" placeholder="Enter mobile number" formControlName="mobile" >
+	            <span *ngIf="customerFrom.get('mobile').invalid && customerFrom.get('mobile').touched" class="font-italic text-danger">Enter valid mobile number</span>
 		      </div>
 		      <div class="form-group">
 		        <label for="exampleInputEmail1">Email</label>
 		        <input class="form-control" placeholder="Enter email" formControlName="email" >
+		        <span *ngIf="customerFrom.get('email').invalid && customerFrom.get('email').touched && !customerFrom.get('email').errors?.emailTaken" class="font-italic text-danger">Enter valid email</span>
+		        <span *ngIf="customerFrom.get('email').errors?.emailTaken" class="font-italic text-danger">Email already exist.</span>
 		      </div>
 		  </div>
 		</div>

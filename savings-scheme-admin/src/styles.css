@@ -481,7 +481,7 @@ footer.sticky-footer {
 .navbar .navbar-nav.navbar-sidenav{
   /*overflow: scroll;*/
 }
-.ng-valid{
+.ng-valid:not(form):not(div){
   border-left: 5px solid #42A948; /* green */
 }
 

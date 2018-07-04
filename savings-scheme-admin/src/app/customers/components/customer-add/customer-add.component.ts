@@ -104,7 +104,7 @@ export class CustomerAddComponent implements OnInit {
   		credentials : this.fb.group({
   			password : ['', Validators.minLength(8)],
   			confirmPassword : ['', Validators.minLength(8)]
-  		})
+  		},{ validators : this._customerValidatorService.validatePassword })
   	});
   }
 

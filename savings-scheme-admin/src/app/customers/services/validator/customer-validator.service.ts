@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { 
 			ValidatorFn, 
 			AsyncValidatorFn, 
-			AbstractControl 
+			AbstractControl,
+			ValidationErrors,
+			FormGroup 
 		} from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
@@ -18,11 +20,21 @@ export class CustomerValidatorService {
 		return (control : AbstractControl): Observable<{[key:string]:any} | null> => {
 			return this._customerService.checkCustomerEmail(control.value).map((response)=>{
 				if(response.status == true){
-					return null;
+					return { emailTaken : { value : true} };
 				}else{
-					return { emailTaken : true }
+					return null;
 				}
 			});
+		}
+	}
+
+	validatePassword(control : FormGroup) : ValidationErrors | null{
+		let password = control.get('password').value;
+		let confirmPassword = control.get('confirmPassword').value;
+		if( password == confirmPassword ){
+			return null;
+		}else{
+			return { 'passwordMismatch' : true };
 		}
 	}
 
