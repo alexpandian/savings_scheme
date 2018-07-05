@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CustomerValidatorService } from '../../services/validator/customer-validator.service';
 import { AddressService } from '../../../common/services/address/address.service';
+import { CustomersService } from '../../services/customers/customers.service';
 
 @Component({
   selector: 'ssa-customer-add',
@@ -17,6 +18,10 @@ import { AddressService } from '../../../common/services/address/address.service
       {
         provide : AddressService,
         useClass : AddressService
+      },
+      {
+        provide : CustomersService,
+        useClass : CustomersService
       }
   ]
 })
@@ -32,7 +37,8 @@ export class CustomerAddComponent implements OnInit {
   	private route : ActivatedRoute,
   	private fb : FormBuilder,
     private _customerValidatorService : CustomerValidatorService,
-    private _addressService : AddressService
+    private _addressService : AddressService,
+    private _customerService : CustomersService
   ) { }
 
   ngOnInit() {
@@ -99,17 +105,21 @@ export class CustomerAddComponent implements OnInit {
             			district : ['', Validators.required],
             			state    : ['', Validators.required],
             			country  : ['', Validators.required],
-            			pincode  : ['']
+            			pincode  : ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]]
   		}),
   		credentials : this.fb.group({
-  			password : ['', Validators.minLength(8)],
-  			confirmPassword : ['', Validators.minLength(8)]
-  		},{ validators : this._customerValidatorService.validatePassword })
+  			password : ['', [Validators.required, Validators.minLength(8)]],
+  			confirmPassword : ['', [Validators.required, Validators.minLength(8)]]
+  		},{ validator : this._customerValidatorService.validatePassword })
   	});
   }
 
-  addCustomer(){
-  	console.log(this.customerFrom.value);
-  	console.log(this.customerFrom);
+  addCustomer(): void{
+  	this._customerService.addCustomer(this.customerFrom.value)
+      .subscribe(
+          (response)=>{
+
+          }
+        );
   }
 }

@@ -28,10 +28,10 @@ export class CustomerValidatorService {
 		}
 	}
 
-	validatePassword(control : FormGroup) : ValidationErrors | null{
-		let password = control.get('password').value;
-		let confirmPassword = control.get('confirmPassword').value;
-		if( password == confirmPassword ){
+	validatePassword(formGroup : FormGroup) : ValidationErrors | null{
+		let password = formGroup.get('password').value;
+		let confirmPassword = formGroup.get('confirmPassword').value;
+		if( password === confirmPassword ){
 			return null;
 		}else{
 			return { 'passwordMismatch' : true };

@@ -39,6 +39,7 @@
 		      <div class="form-group">
 		      	<label for="exampleInputName">Line #1</label>
 	            <input class="form-control" placeholder="Enter street #1" formControlName="street_1" >
+	            <span *ngIf="customerFrom.get('address').get('street_1').invalid && customerFrom.get('address').get('street_1').touched" class="font-italic text-danger">Enter valid street</span>
 		      </div>
 		      <div class="form-group" >
 		      	<label for="exampleInputLastName">Line #2</label>
@@ -56,6 +57,7 @@
               				<option value="" disabled="disabled" >-- country --</option>
               				<option *ngFor="let country of countries" [value]=country.country_id >{{ country.country_code + ' - ' + country.country_name }}</option>
               			</select>
+              			<span *ngIf="customerFrom.get('address').get('country').invalid && customerFrom.get('address').get('country').touched" class="font-italic text-danger">Select country</span>
 		        	</div>
               	</div>
 		      </div>
@@ -67,6 +69,7 @@
               				<option value="" disabled="disabled" > -- State -- </option>
               				<option *ngFor="let state of states" [value]=state.state_id >{{ state.state_name }}</option>
               			</select>
+              			<span *ngIf="customerFrom.get('address').get('state').invalid && customerFrom.get('address').get('state').touched" class="font-italic text-danger">Select state</span>
 		        	</div>
               		<div class="col-md-6 col-sm-12 col-xs-12">
               			<label for="exampleInputEmail1">District</label>
@@ -74,12 +77,14 @@
               				<option value="" > -- District --</option>
               				<option *ngFor="let district of districts" [value]=district.district_id >{{ district.district_name }}</option>
               			</select>
+              			<span *ngIf="customerFrom.get('address').get('district').invalid && customerFrom.get('address').get('district').touched" class="font-italic text-danger">Select district</span>
 		        	</div>
               	</div>
 		      </div>
 		      <div class="form-group">
 		        <label for="exampleInputEmail1">Pincode</label>
 		        <input class="form-control" placeholder="Enter pincode" formControlName="pincode">
+		        <span *ngIf="customerFrom.get('address').get('pincode').invalid && customerFrom.get('address').get('pincode').touched" class="font-italic text-danger">Enter valid pincode</span>
 		      </div>
 		  </div>
 		</div>
@@ -102,12 +107,20 @@
 	                <label for="exampleConfirmPassword">Confirm password</label>
 	                <input class="form-control" type="password" placeholder="Confirm password" formControlName="confirmPassword">
 	              </div>
+	              <div class="col-md-12" *ngIf="customerFrom.get('credentials').invalid && customerFrom.get('credentials').touched" >
+	              	<span class="text-danger font-italic" >Passwords does not match</span>
+	              </div>
 	            </div>
 	          </div>
 
 		  </div>
 		</div>
-		<button type="submit" class="btn btn-primary btn-block btn-lg mt-3" [disabled]="customerFrom.invalid" >Save</button>
+		<div class="form-group">
+            <div class="form-row">
+            	<span class="text-danger font-italic" *ngIf="customerFrom.invalid && customerFrom.dirty" >Fill the form correctly.</span>
+				<button type="submit" class="btn btn-primary btn-block btn-lg mt-3" [disabled]="customerFrom.invalid" >Save</button>
+			</div>
+		</div>
 	</div>
 </div>
 </form>

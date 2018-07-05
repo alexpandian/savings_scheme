@@ -18,6 +18,15 @@ class CustomersModel extends CI_Model
 		$customers = $this->db->get($this->tableName)->result_array();
 		return $customers;
 	}
+
+	public function add($customerDara){
+		$result = $this->db->insert($this->tableName, $customerDara);
+		if($result){
+			return $this->db->insert_id();
+		}else{
+			return false;
+		}
+	}
 }
 
 ?>

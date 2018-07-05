@@ -21,7 +21,11 @@ constructor(
   }
 
   checkCustomerEmail(email : string): Observable<any>{
-  	return this._httpClient.post(this.url + '/check-email', {email});
+  	return this._httpClient.post(this.url + '/check-email', email);
+  }
+
+  addCustomer(customerData : Object){
+  	return this._httpClient.post(this.url + '/add', customerData);
   }
 
 }
