@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CustomerValidatorService } from '../../services/validator/customer-validator.service';
@@ -35,6 +35,7 @@ export class CustomerAddComponent implements OnInit {
 
   constructor( 
   	private route : ActivatedRoute,
+    private router : Router,
   	private fb : FormBuilder,
     private _customerValidatorService : CustomerValidatorService,
     private _addressService : AddressService,
@@ -117,8 +118,10 @@ export class CustomerAddComponent implements OnInit {
   addCustomer(): void{
   	this._customerService.addCustomer(this.customerFrom.value)
       .subscribe(
-          (response)=>{
-
+          (response:any)=>{
+            if(response.customer){
+              this.router.navigate(['/','customers','view', response.customer]);
+            }
           }
         );
   }

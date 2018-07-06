@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ssa-customer-view',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerViewComponent implements OnInit {
 
-  constructor() { }
+	title : string;
+	customer : any; 
+  constructor( private _activatedRoute : ActivatedRoute ) { }
 
   ngOnInit() {
+  	this._activatedRoute.data.subscribe((d)=>{
+  		this.title = d.title;
+  		this.customer = d.customer;
+  	});
   }
 
 }

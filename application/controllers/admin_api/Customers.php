@@ -71,6 +71,31 @@ class Customers extends Admin_Controller
 			}
 		}
 	}
+
+	public function view(){
+		$customer_id = $this->input->get("customer");
+		if($customer_id){
+			$customer = array();
+			$customer_basic_data = $this->CustomersModel->getCustomer($customer_id);
+			if($customer_basic_data){
+				
+				$this->load->model('AddressModel');
+				$person_types = $this->AddressModel->person_types();
+				$customer_address_data = $this->AddressModel->getAddress($customer_id, $person_types['customer']);
+
+				$customer['basic'] = $customer_basic_data[0];
+				$customer['address'] = $customer_address_data;
+
+	  			$this->api->add_to_response('customer', $customer);
+	  			$this->api->add_to_response('status', true);
+	  			$this->api->send_200_response();
+			}else{
+				$this->api->send_404_response();
+			}
+		}else{
+			$this->api->send_400_response();
+		}
+	} 
 }
 
 ?>

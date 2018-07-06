@@ -15,13 +15,13 @@ export class CustomerResolverService implements Resolve<any> {
 
   resolve( route : ActivatedRouteSnapshot, state : RouterStateSnapshot ) : Observable<any>{
   	let customerId = route.paramMap.get('id');
-  	this._customerService.getCustomer(customerId).pipe(
+  	return this._customerService.getCustomer(customerId).pipe(
   			take(1),
-  			map((customer)=>{
+  			map((customer)=>{ 
   				if(customer){
   					return customer;
   				}else{
-  					return null;
+  					this._router.navigate(['/','customers', 'list']);
   				}
   			})
   		);

@@ -27,6 +27,21 @@ class CustomersModel extends CI_Model
 			return false;
 		}
 	}
+
+	public function getCustomer($customer_id){
+		$this->db->select(
+						array(
+							'customer_name',
+							'customer_mobile',
+							'customer_email',
+							'customer_status',
+							'customer_added_date'
+						)
+					);
+		$this->db->where('customer_id', $customer_id);
+		$result = $this->db->get($this->tableName)->result();
+		return $result;
+	}
 }
 
 ?>

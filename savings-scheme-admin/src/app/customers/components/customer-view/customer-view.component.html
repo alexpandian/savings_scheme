@@ -1,3 +1,7 @@
-<p>
-  customer-view works!
-</p>
+<ol class="breadcrumb">
+	<li class="breadcrumb-item" >
+	  <a routerLink="/customers/list" >{{ 'customers' | uppercase }}</a>
+	</li>
+  <li class="breadcrumb-item active">{{ title | uppercase }}</li>
+</ol>
+{{ customer | json }}

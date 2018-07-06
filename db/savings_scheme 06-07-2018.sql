@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2018 at 03:13 PM
+-- Generation Time: Jul 06, 2018 at 03:19 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -44,6 +44,18 @@ CREATE TABLE `ss_addresses` (
   `address_modified_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ss_addresses`
+--
+
+INSERT INTO `ss_addresses` (`address_id`, `address_person_id`, `address_person_type`, `address_street_1`, `address_street_2`, `address_area`, `address_district`, `address_state`, `address_country`, `address_zip`, `address_status`, `address_added_date`, `address_modified_date`) VALUES
+(1, 2, 2, 'dfdsf', 'dfdsf', 'dfdsf', 'dfdsf', 0, 0, 0, 0, '2018-07-05 15:20:58', '2018-07-05 15:20:58'),
+(2, 3, 2, 'street 1', 'street 1', 'street 1', 'street 1', 0, 0, 0, 0, '2018-07-05 15:25:47', '2018-07-05 15:25:47'),
+(3, 4, 2, 'street 1', 'street 1', 'chromepet', '1', 1, 1, 600044, 1, '2018-07-05 15:27:29', '2018-07-05 15:27:29'),
+(4, 5, 2, 'ddas', 'sdasd', 'sadasd', '1', 1, 1, 878979, 1, '2018-07-06 15:12:26', '2018-07-06 15:12:26'),
+(5, 6, 2, 'dasds', 'sdasd', 'sadasd', '1', 1, 1, 878979, 1, '2018-07-06 15:17:36', '2018-07-06 15:17:36'),
+(6, 1, 2, 'rerewr', 'ewrewr', 'ewrewr', '1', 1, 1, 600044, 1, '2018-07-06 00:00:00', '2018-07-06 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -82,6 +94,18 @@ CREATE TABLE `ss_customers` (
   `customer_added_date` datetime DEFAULT NULL,
   `customer_updated_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ss_customers`
+--
+
+INSERT INTO `ss_customers` (`customer_id`, `customer_name`, `customer_mobile`, `customer_email`, `customer_password`, `customer_status`, `customer_added_date`, `customer_updated_date`) VALUES
+(1, 'fdadas', '09362246887', 'asdasdasd@dfgsfsd.dsfdsf', '123456789', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'fdadas', '09362246887', 'asdasdasd@dfgsfsd.dsfd', '123456789', 1, '2018-07-05 15:20:58', '2018-07-05 15:20:58'),
+(3, 'alexpandian', '9786353664', 'email2alexpandian@gmail.com', '25f9e794323b453885f5181f1b624d0b', 1, '2018-07-05 15:25:47', '2018-07-05 15:25:47'),
+(4, 'alexpandian', '9786353664', 'email2alexpandian1@gmail.com', '25f9e794323b453885f5181f1b624d0b', 1, '2018-07-05 15:27:29', '2018-07-05 15:27:29'),
+(5, 'test', '09362246887', 'asdasdasd@dfgsfsd.dsfdf', '25f9e794323b453885f5181f1b624d0b', 1, '2018-07-06 15:12:26', '2018-07-06 15:12:26'),
+(6, 'test', '09362246887', 'asdasdsd@dfgsfsd.dsfdsf', '25f9e794323b453885f5181f1b624d0b', 1, '2018-07-06 15:17:36', '2018-07-06 15:17:36');
 
 -- --------------------------------------------------------
 
@@ -226,7 +250,7 @@ ALTER TABLE `ss_states`
 -- AUTO_INCREMENT for table `ss_addresses`
 --
 ALTER TABLE `ss_addresses`
-  MODIFY `address_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `address_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `ss_countries`
 --
@@ -236,7 +260,7 @@ ALTER TABLE `ss_countries`
 -- AUTO_INCREMENT for table `ss_customers`
 --
 ALTER TABLE `ss_customers`
-  MODIFY `customer_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `customer_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `ss_districts`
 --

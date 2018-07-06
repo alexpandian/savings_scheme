@@ -20,6 +20,10 @@ import { CustomerAddComponent } from '../../customers/components/customer-add/cu
 import { CustomerEditComponent } from '../../customers/components/customer-edit/customer-edit.component';
 import { CustomerViewComponent } from '../../customers/components/customer-view/customer-view.component';
 
+/* resolvers start */
+import { CustomerResolverService } from '../../customers/services/resolver/customer-resolver.service';
+/* resolvers start */ 
+
 
 const routes : Routes = [
 	{
@@ -59,6 +63,9 @@ const routes : Routes = [
 				canActivate : [ RouteGuardService ],
 				data : {
 					title : 'Vew Customer'
+				},
+				resolve : {
+					customer : CustomerResolverService
 				}
 			},
 			{
@@ -101,7 +108,8 @@ const routes : Routes = [
   ],
   providers : [
   	AuthService,
-  	RouteGuardService
+  	RouteGuardService,
+  	CustomerResolverService
   ],
   exports : [
   	RouterModule
