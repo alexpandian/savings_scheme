@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Table } from '../../../common/services/table/table';
 import { CustomersService } from '../../services/customers/customers.service';
 import { CustomerShortData } from '../../models/customers.model';
 
@@ -13,7 +14,11 @@ import { CustomerShortData } from '../../models/customers.model';
 export class CustomersListComponent implements OnInit {
 
 	title : string; 
-  customers : CustomerShortData[];
+  customers : any;
+
+  customersTemp : any;
+
+  requestData : Table =  new Table(0, 2, 'customer_name');
 
   constructor( private route : ActivatedRoute, private _customerService : CustomersService ) { }
 
@@ -21,8 +26,17 @@ export class CustomersListComponent implements OnInit {
   	this.route.data.subscribe((d)=>{
   		this.title = d.title;
   	});
-
     this.customers = this._customerService.getCustomers();
+    this.getCustomers();
+  }
+
+  getCustomers(){
+    let requestData = this.requestData.getAllRequestData();
+    this.customersTemp = this._customerService.getLimitedCustomers(requestData).subscribe(
+        (response) => {
+          console.log(response);
+        }
+      );
   }
 
 }

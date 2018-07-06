@@ -10,6 +10,12 @@ class AddressModel extends CI_Model
 		parent::__construct();
 	}
 
+	private function do_joins(){
+		$this->db->join('countries', 'countries.country_id = addresses.address_country', 'left');
+		$this->db->join('states', 'states.state_id = addresses.address_state', 'left');
+		$this->db->join('districts', 'districts.district_id = addresses.address_district', 'left');
+	}
+
 	public function person_types(){
 		return $person_types = array(
 								'employee' => 1,
@@ -40,9 +46,7 @@ class AddressModel extends CI_Model
 					)
 				);
 		$this->db->from($this->tableName);
-		$this->db->join('countries', 'countries.country_id = addresses.address_country', 'left');
-		$this->db->join('states', 'states.state_id = addresses.address_state', 'left');
-		$this->db->join('districts', 'districts.district_id = addresses.address_district', 'left');
+		$this->do_joins();
 		$this->db->where($this->tableName.'.address_person_id', $person_id);
 		$this->db->where($this->tableName.'.address_person_type', $person_type);
 		$result = $this->db->get()->result();

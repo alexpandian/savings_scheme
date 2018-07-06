@@ -20,6 +20,10 @@ constructor(
   	return customersList;
   }
 
+  getLimitedCustomers(requestData : any): Observable<any>{
+    return this._httpClient.post( this.url, requestData );
+  }
+
   getCustomer( customerId ) : Observable<any>{
     let params : HttpParams = new HttpParams().set('customer',customerId); 
     return this._httpClient.get(this.url + '/view', { params : params });

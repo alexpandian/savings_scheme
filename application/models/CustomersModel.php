@@ -42,6 +42,23 @@ class CustomersModel extends CI_Model
 		$result = $this->db->get($this->tableName)->result();
 		return $result;
 	}
+
+	public function getLimitedCustomers($search_data){
+		$this->db->select(
+						array(
+							'customer_id',
+							'customer_name',
+							'customer_mobile',
+							'customer_email',
+							'customer_status',
+							'customer_added_date'
+						)
+					);
+		$this->db->order_by($search_data->sort, 'ASC');
+		$this->db->limit( $search_data->noOfrecords, $search_data->start );
+		$result = $this->db->get($this->tableName)->result();
+		return $result;
+	}
 }
 
 ?>

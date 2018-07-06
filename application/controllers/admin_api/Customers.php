@@ -96,6 +96,14 @@ class Customers extends Admin_Controller
 			$this->api->send_400_response();
 		}
 	} 
+
+	public function customers_limited(){
+		$search_data_input = json_decode($this->input->raw_input_stream);
+		$customers = $this->CustomersModel->getLimitedCustomers($search_data_input);
+		$this->api->add_to_response('customers',$customers);
+		$this->api->add_to_response('status',true);
+		$this->api->send_200_response();
+	}
 }
 
 ?>
