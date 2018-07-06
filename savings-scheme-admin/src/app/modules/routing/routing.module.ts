@@ -54,6 +54,14 @@ const routes : Routes = [
 				}
 			},
 			{
+				path : 'view/:id',
+				component : CustomerViewComponent,
+				canActivate : [ RouteGuardService ],
+				data : {
+					title : 'Vew Customer'
+				}
+			},
+			{
 				path : 'add',
 				component : CustomerAddComponent,
 				canActivate : [ RouteGuardService ],

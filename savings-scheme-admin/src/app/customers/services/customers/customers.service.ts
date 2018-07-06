@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from '../../../../environments/environment';
 
@@ -18,6 +18,11 @@ constructor(
 
   getCustomers(): CustomerShortData[]{
   	return customersList;
+  }
+
+  getCustomer( customerId ) : Observable<any>{
+    let params : HttpParams = new HttpParams().set('customer',customerId); 
+    return this._httpClient.get(this.url + '/view', { params : params });
   }
 
   checkCustomerEmail(email : string): Observable<any>{
