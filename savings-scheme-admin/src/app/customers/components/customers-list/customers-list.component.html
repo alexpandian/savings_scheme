@@ -28,9 +28,9 @@
               </tfoot>
               <tbody>
                 <tr *ngFor="let customer of customers" >
-                  <td>{{ customer.name }}</td>
-                  <td>{{ customer.mobile }}</td>
-                  <td>{{ customer.email }}</td>
+                  <td>{{ customer.customer_name }}</td>
+                  <td>{{ customer.customer_mobile }}</td>
+                  <td>{{ customer.customer_email }}</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -38,19 +38,30 @@
           </div>
           <div class="row">
            <div class="col-sm-12 col-md-5">
-              <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+              <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+                Showing {{ table.getStart() + 1 }} 
+                to {{ table.getStart() + table.getNoOfRecords() }} 
+                of {{ table.getTotal() }} entries
+              </div>
            </div>
            <div class="col-sm-12 col-md-7">
-              <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+              <div class="pull-right" >
                  <ul class="pagination">
-                    <li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                    <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                    <li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                    <li class="page-item" [ngClass]="{ 'disabled' : !table.getFirstPage() }" (click)="table.goToFirstPage()">
+                      <a class="page-link">First</a>
+                    </li>
+                    <li class="page-item" [ngClass]="{ 'disabled' : !table.getPreviousPage() }" (click)="table.goToPreviousPage()" >
+                      <a class="page-link">Previous</a>
+                    </li>
+                    <li class="page-item active">
+                      <a class="page-link">{{ table.getCurrentPage() }}</a>
+                    </li>
+                    <li class="page-item" [ngClass]="{ 'disabled' : !table.getNextPage() }" (click)="table.goToNextPage()" >
+                      <a class="page-link">Next</a>
+                    </li>
+                    <li class="page-item" [ngClass]="{ 'disabled' : !table.getLastPage() }" (click)="table.goToLastPage()">
+                      <a class="page-link">Last</a>
+                    </li>
                  </ul>
               </div>
            </div>

@@ -44,6 +44,7 @@ class CustomersModel extends CI_Model
 	}
 
 	public function getLimitedCustomers($search_data){
+		$sort_array = (array) $search_data->sort;
 		$this->db->select(
 						array(
 							'customer_id',
@@ -54,10 +55,17 @@ class CustomersModel extends CI_Model
 							'customer_added_date'
 						)
 					);
-		$this->db->order_by($search_data->sort, 'ASC');
+		foreach ($sort_array as $sort_key => $sort_value) {
+			$this->db->order_by($sort_key, $sort_value);
+		}
 		$this->db->limit( $search_data->noOfrecords, $search_data->start );
 		$result = $this->db->get($this->tableName)->result();
 		return $result;
+	}
+
+	public function getLimitedCustomersCount($search_data){
+		$count = $this->db->count_all_results($this->tableName);
+		return $count;
 	}
 }
 

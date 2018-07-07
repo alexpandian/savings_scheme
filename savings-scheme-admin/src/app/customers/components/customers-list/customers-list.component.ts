@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Table } from '../../../common/services/table/table';
 import { CustomersService } from '../../services/customers/customers.service';
-import { CustomerShortData } from '../../models/customers.model';
+//import { CustomerShortData } from '../../models/customers.model';
 
 @Component({
   selector: 'ssa-customers-list',
@@ -15,10 +15,7 @@ export class CustomersListComponent implements OnInit {
 
 	title : string; 
   customers : any;
-
-  customersTemp : any;
-
-  requestData : Table =  new Table(0, 2, 'customer_name');
+  table : Table =  new Table(0, 2, {'customer_name' : 'asc'});
 
   constructor( private route : ActivatedRoute, private _customerService : CustomersService ) { }
 
@@ -26,15 +23,24 @@ export class CustomersListComponent implements OnInit {
   	this.route.data.subscribe((d)=>{
   		this.title = d.title;
   	});
-    this.customers = this._customerService.getCustomers();
+    //this.customers = this._customerService.getCustomers();
     this.getCustomers();
   }
 
+  ngDoCheck(){
+    // if(this.table !== this.table){
+
+    // }
+    console.log(this.table.getAllRequestData());
+  }
+
   getCustomers(){
-    let requestData = this.requestData.getAllRequestData();
-    this.customersTemp = this._customerService.getLimitedCustomers(requestData).subscribe(
+    let requestData = this.table.getAllRequestData();
+    this._customerService.getLimitedCustomers(requestData).subscribe(
         (response) => {
-          console.log(response);
+          this.customers = response.customers;
+          this.table.setTotal(response.count);
+          this.table.initPagination();
         }
       );
   }

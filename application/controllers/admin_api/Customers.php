@@ -99,7 +99,9 @@ class Customers extends Admin_Controller
 
 	public function customers_limited(){
 		$search_data_input = json_decode($this->input->raw_input_stream);
+		$count = $this->CustomersModel->getLimitedCustomersCount($search_data_input);
 		$customers = $this->CustomersModel->getLimitedCustomers($search_data_input);
+		$this->api->add_to_response('count',$count);
 		$this->api->add_to_response('customers',$customers);
 		$this->api->add_to_response('status',true);
 		$this->api->send_200_response();
