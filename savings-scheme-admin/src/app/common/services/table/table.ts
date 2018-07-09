@@ -66,7 +66,7 @@ export class Table {
 		this._pagination.firstPage = false;
 		this._pagination.previousPage = false;
 		this._pagination.currentPage = 1;
-		this._pagination.nextPage = (this._pagination.totalPages > 1) ? this._pagination.totalPages : false ;
+		this._pagination.nextPage = (this._pagination.totalPages > 1) ? 2 : false ;
 		this._pagination.lastPage = (this._pagination.totalPages > 1) ? this._pagination.totalPages : false ;
 	}
 
@@ -108,19 +108,19 @@ export class Table {
 	}
 
 	goToPreviousPage(){
-		if( (this._pagination.currentPage - 1) < 1 ){
+		if( this._pagination.currentPage == 1 ){
 			return null;
-		}else if( (this._pagination.currentPage - 1) == 1 ){
+		}else if( this._pagination.currentPage == 2 ){
 			this._pagination.firstPage = false;
 			this._pagination.previousPage = false;
-			this._pagination.currentPage--;
-			this._pagination.nextPage--;
+			this._pagination.currentPage = 1;
+			this._pagination.nextPage = 2;
 			this._pagination.lastPage = this._pagination.totalPages;
 		}else{
 			this._pagination.firstPage = 1;
-			this._pagination.previousPage--;
+			this._pagination.previousPage = this._pagination.currentPage - 2;
 			this._pagination.currentPage--;
-			this._pagination.nextPage--;
+			this._pagination.nextPage = this._pagination.currentPage + 1;
 			this._pagination.lastPage = this._pagination.totalPages;
 		}
 		this.updateStart();

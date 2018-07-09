@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, KeyValueDiffers } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Table } from '../../../common/services/table/table';
@@ -16,22 +16,30 @@ export class CustomersListComponent implements OnInit {
 	title : string; 
   customers : any;
   table : Table =  new Table(0, 2, {'customer_name' : 'asc'});
+  differ : any;
 
-  constructor( private route : ActivatedRoute, private _customerService : CustomersService ) { }
+  constructor( 
+                private route : ActivatedRoute, 
+                private _customerService : CustomersService,
+                private _differs : KeyValueDiffers 
+              ) {
+    this.differ = _differs.find({}).create();
+  }
 
   ngOnInit() {
   	this.route.data.subscribe((d)=>{
   		this.title = d.title;
   	});
     //this.customers = this._customerService.getCustomers();
-    this.getCustomers();
+    //this.getCustomers();
+    this.table.initPagination();
   }
 
   ngDoCheck(){
-    // if(this.table !== this.table){
-
-    // }
-    console.log(this.table.getAllRequestData());
+    let changes = this.differ.diff(this.table);
+    if( changes ){
+      this.getCustomers();
+    }
   }
 
   getCustomers(){
@@ -40,7 +48,7 @@ export class CustomersListComponent implements OnInit {
         (response) => {
           this.customers = response.customers;
           this.table.setTotal(response.count);
-          this.table.initPagination();
+          //this.table.initPagination();
         }
       );
   }
