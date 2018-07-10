@@ -20,6 +20,10 @@ constructor(
   	return customersList;
   }
 
+  getCustomersCount(requestData : any): Observable<any>{
+    return this._httpClient.post( this.url + '/count', requestData );
+  }
+
   getLimitedCustomers(requestData : any): Observable<any>{
     return this._httpClient.post( this.url, requestData );
   }

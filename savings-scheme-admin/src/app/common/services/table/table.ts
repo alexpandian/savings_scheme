@@ -1,25 +1,15 @@
 export class Table {
 
-	private _start : number;
-	private _noOfRecords : number;
+	private _start : number = 0;
+	private _noOfRecords : number = 10;
 	private _sort : object;
-	private _search : object[] = new Array();
+	private _search : object = new Object();
 	private _totalRecords : number = 0;
 	private _pagination : any = new Object();
+	private _noOfRecordsList : number[] = [10, 25, 50, 100];
 
-	constructor(
-				start? : number, 
-				noOfRecords? : number, 
-				sort? : object,
-				search? : object
-				){
-		this._start = (start) ? start : 0; 
-		this._noOfRecords = (noOfRecords) ? noOfRecords : 10; 
+	constructor(sort? : object){
 		this._sort = (sort) ? sort : null; 
-		if(search){
-			this._search.push(search);
-		}
-		//this.initPagination();
 	}
 
 	getStart(){
@@ -37,7 +27,11 @@ export class Table {
 		return this._noOfRecords;
 	}
 	setNoOfRecords(noOfRecords : number){
-		this._noOfRecords = noOfRecords;
+		this._noOfRecords = Number(noOfRecords);
+	}
+
+	getNoOfRecordsList(){
+		return this._noOfRecordsList;
 	}
 
 	getSort(){
@@ -50,8 +44,15 @@ export class Table {
 	getSearch(){
 		return this._search;
 	}
-	setSearch(search : object){
-		this._search.push(search);
+	addSearch(key, value){ 
+		if(value){
+			this._search[key] = value;
+		}else{
+			if(this._search.hasOwnProperty(key)){
+				delete this._search[key];
+			}
+			return false;
+		}
 	}
 
 	getTotal(){
@@ -62,6 +63,7 @@ export class Table {
 	}
 
 	initPagination(){
+		this._start = 0;
 		this._pagination.totalPages = (this._totalRecords) ? Math.ceil(this._totalRecords / this._noOfRecords) : 0;
 		this._pagination.firstPage = false;
 		this._pagination.previousPage = false;
@@ -163,6 +165,15 @@ export class Table {
 	}
 	setLastPage(page : number){
 		this._pagination.lastPage = page;
+	}
+
+	getRecordStart(){
+		return ( this._totalRecords == 0 ) ? 0 : this._start + 1;
+	}
+
+	getRecordEnd(){
+		let end = this._start + this._noOfRecords;
+		return ( end > this._totalRecords ) ? this._totalRecords : end;
 	}
 
 	getAllRequestData(){

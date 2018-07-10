@@ -45,6 +45,7 @@ class CustomersModel extends CI_Model
 
 	public function getLimitedCustomers($search_data){
 		$sort_array = (array) $search_data->sort;
+		$search_array = (array) $search_data->search;
 		$this->db->select(
 						array(
 							'customer_id',
@@ -55,6 +56,17 @@ class CustomersModel extends CI_Model
 							'customer_added_date'
 						)
 					);
+		if($search_array){
+			foreach ($search_array as $search_key => $search_value) {
+				if($search_value != ""){
+					if($search_key == 'customer_status'){
+						$this->db->where($search_key, $search_value);
+					}else{
+						$this->db->like($search_key, $search_value);
+					}
+				}
+			}
+		}
 		foreach ($sort_array as $sort_key => $sort_value) {
 			$this->db->order_by($sort_key, $sort_value);
 		}
@@ -64,7 +76,20 @@ class CustomersModel extends CI_Model
 	}
 
 	public function getLimitedCustomersCount($search_data){
-		$count = $this->db->count_all_results($this->tableName);
+		$search_array = (array) $search_data->search;
+		if($search_array){
+			foreach ($search_array as $search_key => $search_value) {
+				if($search_value != ""){
+					if($search_key == 'customer_status'){
+						$this->db->where($search_key, $search_value);
+					}else{
+						$this->db->like($search_key, $search_value);
+					}
+				}
+			}
+		}
+		$this->db->from($this->tableName);
+		$count = $this->db->count_all_results();
 		return $count;
 	}
 }

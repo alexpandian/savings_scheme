@@ -504,4 +504,22 @@ footer.sticky-footer {
 .page-item.disabled .page-link{
   opacity: 0.5;
 }
+table.table thead tr th i.fa{
+  cursor: pointer;
+} 
+tbody.loading tr td{
+    font-size: 1.5em;
+    color: #008000;
+}
+tbody.error tr td{
+    font-size: 1.5em;
+    color: #ff0000;
+}
+td.action-icons span{
+  cursor: pointer;
+}
+td.action-icons span:hover{
+  font-weight: 500;
+  color: blue;
+}
 /* alex styles ends here */

@@ -54,6 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['a/customers/check-email'] = 'admin_api/customers/check_email';
 $route['a/customers/add'] = 'admin_api/customers/add';
 $route['a/customers/view'] = 'admin_api/customers/view';
+$route['a/customers/count'] = 'admin_api/customers/count';
 $route['a/customers'] = 'admin_api/customers/customers_limited';
 /* Customers related routes */
 

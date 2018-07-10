@@ -6,47 +6,97 @@
 </ol>
 <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> All Customers</div>
+          <i class="fa fa-table"></i> All Customers
+          <button class="btn btn-primary pull-right" routerLink="/customers/add" >
+            <i class="fa fa-user-plus" aria-hidden="true"></i> Add new customer
+          </button>
+        </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Mobile</th>
-                  <th>Email</th>
+                  <th>
+                    Name 
+                    <i class="fa fa-sort-alpha-asc pull-right" aria-hidden="true" (click)="table.setSort({ 'customer_name' : 'desc' })" *ngIf="table.getSort().customer_name == 'asc'" ></i>
+                    <i class="fa fa-sort-alpha-desc  pull-right" aria-hidden="true" (click)="table.setSort({ 'customer_name' : 'asc' })"  *ngIf="table.getSort().customer_name == 'desc'"  ></i>
+
+                    <input type="text" class="form-control form-control-sm" (focusout)="table.addSearch('customer_name', $event.target.value)" >
+                  </th>
+                  <th>
+                    Mobile
+                    <input type="text" class="form-control form-control-sm" (focusout)="table.addSearch('customer_mobile', $event.target.value)">
+                  </th>
+                  <th>
+                    Email
+                    <input type="text" class="form-control form-control-sm" (focusout)="table.addSearch('customer_email', $event.target.value)">
+                  </th>
+                  <th>
+                    Status
+                    <select class="form-control form-control-sm" (change)="table.addSearch('customer_status', $event.target.value)" >
+                      <option value="" > All </option>
+                      <option value="1" > Active </option>
+                      <option value="0" > Inactive </option>
+                    </select>
+                  </th>
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tfoot>
+              <tbody *ngIf="loading" class="loading" >
                 <tr>
-                    <th>Name</th>
-                    <th>Mobile</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                  </tr>
-              </tfoot>
+                  <td colspan="5" class="text-center" > 
+                    <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                    Loading...
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="!customers.length && !loading" class="error" >
+                <tr>
+                  <td colspan="5" class="text-center" > 
+                    <i class="fa fa-frown-o" aria-hidden="true"></i>
+                    No customers found
+                  </td>
+                </tr>
+              </tbody>
               <tbody>
                 <tr *ngFor="let customer of customers" >
                   <td>{{ customer.customer_name }}</td>
                   <td>{{ customer.customer_mobile }}</td>
                   <td>{{ customer.customer_email }}</td>
-                  <td></td>
+                  <td>
+                    <span class="badge" [ngClass]="{ 'badge-danger' : customer.customer_status == 0, 'badge-success' : customer.customer_status == 1 }" >{{ (customer.customer_status == 1) ? 'Active' : 'Inactive' }}</span>
+                  </td>
+                  <td class="action-icons">
+                    <span class="pull-left" [routerLink]="['/customers', 'view', customer.customer_id]"  >view / edit <i class="fa fa-eye" aria-hidden="true"></i> / <i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="row">
-           <div class="col-sm-12 col-md-5">
+           <div class="col-sm-12 col-md-3">
               <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                Showing {{ table.getStart() + 1 }} 
-                to {{ table.getStart() + table.getNoOfRecords() }} 
+                Showing {{ table.getRecordStart() }} 
+                to {{ table.getRecordEnd() }} 
                 of {{ table.getTotal() }} entries
               </div>
            </div>
-           <div class="col-sm-12 col-md-7">
+           <div class="col-sm-12 col-md-3">
+              <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Show</span>
+                </div>
+                <select class="form-control form-control-sm" (change)="table.setNoOfRecords($event.target.value)" >
+                    <option *ngFor="let record of table.getNoOfRecordsList()" [value]="record" >{{ record }}</option>
+                </select>
+                <div class="input-group-append">
+                  <span class="input-group-text">entries</span>
+                </div>
+              </div>
+            </div>
+           <div class="col-sm-12 col-md-6">
               <div class="pull-right" >
-                 <ul class="pagination">
+                 <ul class="pagination pagination-sm">
                     <li class="page-item" [ngClass]="{ 'disabled' : !table.getFirstPage() }" (click)="table.goToFirstPage()">
                       <a class="page-link">First</a>
                     </li>

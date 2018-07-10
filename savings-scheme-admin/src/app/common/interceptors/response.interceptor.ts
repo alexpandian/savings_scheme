@@ -21,10 +21,14 @@ export class ResponseInterceptor implements HttpInterceptor{
 			},
 			(error : any)=>{
 				if(error instanceof HttpErrorResponse){
-					console.log(error);
-					// if (error.status === 401) {
-					// 	console.log("dasd");
-					// }
+					
+					 if (error.status === 0 || error.status === 500) {
+					 	alert("Unexpected error occured. Try again later.");
+					 }
+
+					 if (error.status === 401) {
+					 	alert("Login again");
+					 }
 				}
 			});
 	}

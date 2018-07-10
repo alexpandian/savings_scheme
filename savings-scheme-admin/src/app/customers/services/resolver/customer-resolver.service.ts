@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/observable';
-import { map, take } from 'rxjs/operators';
+import { map, take, catchError } from 'rxjs/operators';
 
 import { CustomersService } from '../customers/customers.service';
 
@@ -22,8 +22,13 @@ export class CustomerResolverService implements Resolve<any> {
   					return customer;
   				}else{
   					this._router.navigate(['/','customers', 'list']);
+            return new Array();
   				}
-  			})
+  			}),
+        catchError((error, caught) =>{
+          this._router.navigate(['/','customers', 'list']);
+            return new Array();
+        })
   		);
   }
 
