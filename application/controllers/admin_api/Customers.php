@@ -83,7 +83,7 @@ class Customers extends Admin_Controller
 				$person_types = $this->AddressModel->person_types();
 				$customer_address_data = $this->AddressModel->getAddress($customer_id, $person_types['customer']);
 
-				$customer['basic'] = $customer_basic_data[0];
+				$customer['basic'] = $customer_basic_data;
 				$customer['address'] = $customer_address_data;
 
 	  			$this->api->add_to_response('customer', $customer);

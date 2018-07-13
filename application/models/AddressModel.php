@@ -49,7 +49,7 @@ class AddressModel extends CI_Model
 		$this->do_joins();
 		$this->db->where($this->tableName.'.address_person_id', $person_id);
 		$this->db->where($this->tableName.'.address_person_type', $person_type);
-		$result = $this->db->get()->result();
+		$result = $this->db->get()->row();
 		//echo $this->db->last_query();
 		return $result; 
 	}

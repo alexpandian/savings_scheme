@@ -45,6 +45,7 @@ const routes : Routes = [
 		path : 'customers',
 		component : CustomersComponent,
 		canActivate : [ RouteGuardService ],
+		canActivateChild : [ RouteGuardService ],
 		data : {
 			title : 'customers'
 		},
@@ -52,7 +53,6 @@ const routes : Routes = [
 			{
 				path : 'list',
 				component : CustomersListComponent,
-				canActivate : [ RouteGuardService ],
 				data : {
 					title : 'All Customers'
 				}
@@ -60,7 +60,6 @@ const routes : Routes = [
 			{
 				path : 'view/:id',
 				component : CustomerViewComponent,
-				canActivate : [ RouteGuardService ],
 				data : {
 					title : 'Vew Customer'
 				},
@@ -71,7 +70,6 @@ const routes : Routes = [
 			{
 				path : 'add',
 				component : CustomerAddComponent,
-				canActivate : [ RouteGuardService ],
 				data : {
 					title : 'Add Customer'
 				}
@@ -79,7 +77,6 @@ const routes : Routes = [
 			{
 				path : 'edit',
 				component : CustomerAddComponent,
-				canActivate : [ RouteGuardService ],
 				data : {
 					title : 'Edit Customer'
 				}

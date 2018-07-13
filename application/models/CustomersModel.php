@@ -39,7 +39,7 @@ class CustomersModel extends CI_Model
 						)
 					);
 		$this->db->where('customer_id', $customer_id);
-		$result = $this->db->get($this->tableName)->result();
+		$result = $this->db->get($this->tableName)->row();
 		return $result;
 	}
 
