@@ -15,7 +15,7 @@ export class CustomerViewComponent implements OnInit {
   ngOnInit() {
   	this._activatedRoute.data.subscribe((d)=>{
   		this.title = d.title;
-  		this.customer = d.customer;
+  		this.customer = d.customer.customer;
   	});
   }
 
