@@ -522,4 +522,14 @@ td.action-icons span:hover{
   font-weight: 500;
   color: blue;
 }
+.ssa-icon{
+  color: #0620d7; 
+  opacity: 0.5;
+  cursor: pointer;
+}
+.ssa-icon:hover{
+  color: #0620d7; 
+  opacity: 1;
+  text-decoration: underline;
+}
 /* alex styles ends here */

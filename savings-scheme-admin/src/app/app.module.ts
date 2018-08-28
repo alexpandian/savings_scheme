@@ -18,6 +18,7 @@ import { CustomerAddComponent } from './customers/components/customer-add/custom
 import { CustomerViewComponent } from './customers/components/customer-view/customer-view.component';
 import { CustomerEditComponent } from './customers/components/customer-edit/customer-edit.component';
 import { CustomersComponent } from './customers/components/customers/customers.component';
+import { EditSaveDirective } from './common/directives/edit-save/edit-save.directive';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { CustomersComponent } from './customers/components/customers/customers.c
     CustomerAddComponent,
     CustomerViewComponent,
     CustomerEditComponent,
-    CustomersComponent
+    CustomersComponent,
+    EditSaveDirective
   ],
   imports: [
     BrowserModule,
